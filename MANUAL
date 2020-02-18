@@ -1,0 +1,6 @@
+**Usage**
+
+```
+./setup.sh
+./node/target/release/node-template --dev
+```
