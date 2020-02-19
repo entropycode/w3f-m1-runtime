@@ -6,3 +6,10 @@ Local node:
 cargo build --release
 ./node/target/release/node-template --dev
 ```
+
+
+Docker 
+```
+docker build -t feedbacknode .
+docker run -d -p 9933:9933 -p 9944:9944 -v feedbackVol:/app feedbacknode
+```
