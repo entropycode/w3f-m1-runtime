@@ -1,6 +1,8 @@
 **Usage**
 
+Local node:
 ```
 ./setup.sh
+cargo build --release
 ./node/target/release/node-template --dev
 ```

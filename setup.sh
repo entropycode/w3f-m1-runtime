@@ -1,33 +1,58 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-# Cloning node template
-git clone -n https://github.com/substrate-developer-hub/substrate-node-template.git node
-cd node/
-git checkout tags/pre-v2.0-3e65111 -b node
+set -ex
 
-lib='runtime/src/lib.rs'
-cargotoml='runtime/Cargo.toml'
+git clone -b pre-v2.0-3e65111 --depth 1 https://github.com/substrate-developer-hub/substrate-node-template node
+git checkout -b feedback-node
 
-# Adding impl of feedback to runtime/lib.rs
-sed -i '' 's/construct_runtime!(/impl feedback::Trait for Runtime {\
-	type Event = Event;\
-}\
-\
-construct_runtime!(/' $lib
+lib='node/runtime/src/lib.rs'
+cargotoml='node/runtime/Cargo.toml'
 
-# Include in construct_runtime! in runtime/lib.rs
-sed -i '' 's/Sudo: sudo,/Sudo: sudo,\
-		Feedback: feedback::{Module, Call, Storage, Event<T>},/' $lib
 
-# Include feedback dependency in cargo.toml
-sed -i '' "s/\[features\]/[dependencies.feedback]\\
-default-features = false\\
-path = '..\/..\/feedback'\\
-\\
-[features]/" $cargotoml
+# sed for OSX and Linux is different, OSX requires extension to be specified
+if [[ "$OSTYPE" == "darwin"* ]]; then
 
-# std Features in cargo.toml
-sed -i '' "s/'transaction-payment\/std',/'transaction-payment\/std',\\
-    'feedback\/std'/" $cargotoml
+	echo 'Darwin'
+	
+	sed -i '' 's/construct_runtime!(/impl feedback::Trait for Runtime {\
+		type Event = Event;\
+	}\
+	\
+	construct_runtime!(/' $lib
 
-cargo build --release
+	sed -i '' 's/Sudo: sudo,/Sudo: sudo,\
+			Feedback: feedback::{Module, Call, Storage, Event<T>},/' $lib
+
+	sed -i '' "s/\[features\]/[dependencies.feedback]\\
+	default-features = false\\
+	path = '..\/..\/feedback'\\
+	\\
+	[features]/" $cargotoml
+
+	sed -i '' "s/'transaction-payment\/std',/'transaction-payment\/std',\\
+		'feedback\/std'/" $cargotoml
+
+elif [[ "$OSTYPE" == "linux-gnu" ]]; then
+
+	echo 'Linux-GNU'
+
+	sed -i 's/construct_runtime!(/impl feedback::Trait for Runtime {\
+		type Event = Event;\
+	}\
+	\
+	construct_runtime!(/' $lib
+
+	sed -i 's/Sudo: sudo,/Sudo: sudo,\
+			Feedback: feedback::{Module, Call, Storage, Event<T>},/' $lib
+
+	sed -i "s/\[features\]/[dependencies.feedback]\\
+	default-features = false\\
+	path = '..\/..\/feedback'\\
+	\\
+	[features]/" $cargotoml
+
+	sed -i "s/'transaction-payment\/std',/'transaction-payment\/std',\\
+		'feedback\/std'/" $cargotoml
+
+fi
+
