@@ -28,7 +28,7 @@ decl_storage! {
 	}
 }
 
-// The pallet's dispatchable functions.
+// The module's dispatchable functions.
 decl_module! {
 	pub struct Module<T: Trait> for enum Call where origin: T::Origin {
 		fn deposit_event() = default;
@@ -114,7 +114,7 @@ decl_event!(
 	}
 );
 
-/// tests for this pallet
+/// tests for this module
 #[cfg(test)]
 mod tests {
 	use super::*;
@@ -128,7 +128,7 @@ mod tests {
 		pub enum Origin for Test {}
 	}
 
-	// For testing the pallet, we construct most of a mock runtime. This means
+	// For testing the module, we construct most of a mock runtime. This means
 	// first constructing a configuration type (`Test`) which `impl`s each of the
 	// configuration traits of modules we want to use.
 	#[derive(Clone, Eq, PartialEq)]
