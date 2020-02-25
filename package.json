@@ -1,8 +1,0 @@
-{
-  "name": "feedback-substrate-node",
-  "version": "0.1.0",
-  "description": "Feedback Pallet with node-template setup",
-  "author": "Entropy Labs Limited",
-  "license": "SEE LICENSE IN LICENSE",
-  "private": true
-}
