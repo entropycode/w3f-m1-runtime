@@ -1,8 +1,10 @@
 ---
-title: "Feedback Module"
+# Feedback Module
 ---
 
-The feedback module facilitate users to create polls with certain options and expiration times, this is an example module used to demonstrate this [CLI tool](). This documents the logic behind the feedback module.
+The feedback module facilitate users to create polls with certain options and expiration times, this is an example module used to demonstrate this [CLI tool]().
+
+Please see [MANUAL] for build instructions and additional information.
 
 #### Poll
 
