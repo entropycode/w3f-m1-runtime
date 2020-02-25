@@ -24,9 +24,9 @@ An account can respond to poll and the pallet makes sure that:
 
 The response is added to `Responses` by incrementing the tally of the option by 1
 
-#### Reveal
+#### Seal
 
-After a poll has expired, anyone can call the reveal function which:
+After a poll has expired, anyone can call seal which:
 
 - iterates through the responses tally of the polls 
 - set the most popular option to be the result of the poll

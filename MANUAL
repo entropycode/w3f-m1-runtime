@@ -1,14 +1,23 @@
 **Usage**
 
-Local node:
+Note: Ensure rust nightly toolchain for wasm32 is installed.
+```
+rustup target add wasm32-unknown-unknown --toolchain nightly
+rustup update nightly
+rustup default nightly
+```
+
+
+Build and run substrate runtime with feedback:
 ```
 ./setup.sh
+cd node
 cargo build --release
-./node/target/release/node-template --dev
+./target/release/node-template --dev
 ```
 
 
-Docker 
+Build Docker image
 ```
 docker build -t feedbacknode .
 docker run -d -p 9933:9933 -p 9944:9944 -v feedbackVol:/app feedbacknode

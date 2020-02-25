@@ -3,7 +3,6 @@
 set -ex
 
 git clone -b pre-v2.0-3e65111 --depth 1 https://github.com/substrate-developer-hub/substrate-node-template node
-git checkout -b feedback-node
 
 lib='node/runtime/src/lib.rs'
 cargotoml='node/runtime/Cargo.toml'

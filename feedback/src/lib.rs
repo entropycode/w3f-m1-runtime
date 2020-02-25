@@ -80,7 +80,7 @@ decl_module! {
 			Ok(())
 		}
 
-		pub fn reveal(_origin, _poll_id: u64) -> DispatchResult {
+		pub fn seal(_origin, _poll_id: u64) -> DispatchResult {
 			
 			ensure!(<Polls<T>>::exists(_poll_id), "Poll does not exist");
 			let poll = <Polls<T>>::get(_poll_id);
@@ -279,7 +279,7 @@ mod tests {
 			assert_ok!(Feedback::respond(Origin::signed(responder1), respond_poll_id, option1.clone()));
 			assert_ok!(Feedback::respond(Origin::signed(responder2), respond_poll_id, option1.clone()));
 			Moment::set_timestamp(241);
-			assert_ok!(Feedback::reveal(Origin::signed(responder2), respond_poll_id));
+			assert_ok!(Feedback::seal(Origin::signed(responder2), respond_poll_id));
 			assert_eq!(Feedback::polls(respond_poll_id).choice, option1_hash);
 		});
 	}
@@ -304,7 +304,7 @@ mod tests {
 			assert_ok!(Feedback::respond(Origin::signed(responder1), respond_poll_id, option1.clone()));
 			assert_ok!(Feedback::respond(Origin::signed(responder2), respond_poll_id, option2.clone()));
 			Moment::set_timestamp(241);
-			assert_ok!(Feedback::reveal(Origin::signed(responder2), respond_poll_id));
+			assert_ok!(Feedback::seal(Origin::signed(responder2), respond_poll_id));
 			assert_eq!(Feedback::polls(respond_poll_id).choice, empty_hash);
 		});
 	}
