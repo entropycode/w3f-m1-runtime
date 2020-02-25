@@ -1,6 +1,4 @@
----
 # Feedback Module
----
 
 The feedback module facilitate users to create polls with certain options and expiration times, this is an example module used to demonstrate this [CLI tool]().
 
@@ -29,7 +27,3 @@ After a poll has expired, anyone can call seal which:
 
 - iterates through the responses tally of the polls 
 - set the most popular option to be the result of the poll
-
-
-
-
