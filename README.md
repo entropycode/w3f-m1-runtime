@@ -1,11 +1,8 @@
 ---
-title: "Feedback Pallet"
+title: "Feedback Module"
 ---
 
-The feedback pallet facilitate users to create polls with certain options and expiration times, this is an example pallet used to demonstrate this [CLI tool](). This documents the logic behind the feedback pallet, as it's own crate, that can be used along with other Pallets in substrate.
-
-The code for this pallet can be found [in this repository]().
-
+The feedback module facilitate users to create polls with certain options and expiration times, this is an example module used to demonstrate this [CLI tool](). This documents the logic behind the feedback module.
 
 #### Poll
 
@@ -17,10 +14,10 @@ Each poll is created with the following logic:
 
 #### Respond
 
-An account can respond to poll and the pallet makes sure that:
+An account can respond to the poll if:
 
-- An account have not responded to the same poll, checked in `Entries`
-- The poll is still active and has not expired
+- it has not responded to the same poll (checked in `Entries`)
+- the poll has not expired
 
 The response is added to `Responses` by incrementing the tally of the option by 1
 
