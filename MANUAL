@@ -13,12 +13,12 @@ Build and run substrate runtime with feedback:
 ./setup.sh
 cd node
 cargo build --release
-./target/release/node-template --dev
+./target/release/feedback-node --dev
 ```
 
 
 Build Docker image
 ```
 docker build -t feedbacknode .
-docker run -d -p 9933:9933 -p 9944:9944 -v feedbackVol:/app feedbacknode
+docker run -d -p 9933:9933 -p 9944:9944 -v feedbackVol:/app --name feedbacknode feedbacknode 
 ```

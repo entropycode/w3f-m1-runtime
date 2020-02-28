@@ -11,4 +11,4 @@ WORKDIR /app/node/
 RUN cargo build --release
 EXPOSE 9944 9933
 VOLUME ["/app"]
-CMD ["./target/release/node-template", "--dev"]
+CMD ["./target/release/feedback-node",  "--ws-external", "--rpc-external", "--dev"]

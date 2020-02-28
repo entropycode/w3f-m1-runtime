@@ -6,21 +6,21 @@ git clone -b pre-v2.0-3e65111 --depth 1 https://github.com/substrate-developer-h
 
 lib='node/runtime/src/lib.rs'
 cargotoml='node/runtime/Cargo.toml'
+roottoml='node/Cargo.toml'
 
 
 # sed for OSX and Linux is different, OSX requires extension to be specified
 if [[ "$OSTYPE" == "darwin"* ]]; then
 
 	echo 'Darwin'
-	
-	sed -i '' 's/construct_runtime!(/impl feedback::Trait for Runtime {\
-		type Event = Event;\
-	}\
-	\
-	construct_runtime!(/' $lib
 
-	sed -i '' 's/Sudo: sudo,/Sudo: sudo,\
-			Feedback: feedback::{Module, Call, Storage, Event<T>},/' $lib
+	sed -i '' 's/mod template;//' $lib
+	
+	sed -i '' 's/template::/feedback::/' $lib
+
+	sed -i '' 's/TemplateModule:/Feedback:/' $lib
+
+	sed -i '' 's/node-template/feedback-node/' $lib
 
 	sed -i '' "s/\[features\]/[dependencies.feedback]\\
 	default-features = false\\
@@ -31,18 +31,21 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 	sed -i '' "s/'transaction-payment\/std',/'transaction-payment\/std',\\
 		'feedback\/std'/" $cargotoml
 
+	
+	sed -i '' "s/name = 'node-template'/name = 'feedback-node'/" $roottoml
+
 elif [[ "$OSTYPE" == "linux-gnu" ]]; then
 
 	echo 'Linux-GNU'
 
-	sed -i 's/construct_runtime!(/impl feedback::Trait for Runtime {\
-		type Event = Event;\
-	}\
-	\
-	construct_runtime!(/' $lib
 
-	sed -i 's/Sudo: sudo,/Sudo: sudo,\
-			Feedback: feedback::{Module, Call, Storage, Event<T>},/' $lib
+	sed -i 's/mod template;//' $lib
+	
+	sed -i 's/template::/feedback::/' $lib
+
+	sed -i 's/TemplateModule:/Feedback:/' $lib
+
+	sed -i 's/node-template/feedback-node/' $lib
 
 	sed -i "s/\[features\]/[dependencies.feedback]\\
 	default-features = false\\
@@ -52,6 +55,9 @@ elif [[ "$OSTYPE" == "linux-gnu" ]]; then
 
 	sed -i "s/'transaction-payment\/std',/'transaction-payment\/std',\\
 		'feedback\/std'/" $cargotoml
+
+	
+	sed -i "s/name = 'node-template'/name = 'feedback-node'/" $roottoml
 
 fi
 
