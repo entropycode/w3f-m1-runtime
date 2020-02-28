@@ -2,9 +2,8 @@
 
 Note: Ensure rust nightly toolchain for wasm32 is installed.
 ```
-rustup target add wasm32-unknown-unknown --toolchain nightly
-rustup update nightly
 rustup default nightly
+rustup target add wasm32-unknown-unknown --toolchain nightly
 ```
 
 
