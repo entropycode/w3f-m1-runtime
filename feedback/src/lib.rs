@@ -1,3 +1,5 @@
+// Copyright © 2019-2020 Entropy Labs
+
 #![cfg_attr(not(feature = "std"), no_std)]
 
 use frame_support::{decl_module, decl_storage, decl_event, dispatch::DispatchResult, dispatch::Vec, StorageValue, StorageMap, ensure};
