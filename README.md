@@ -27,3 +27,7 @@ After a poll has expired, anyone can call seal which:
 
 - iterates through the responses tally of the polls 
 - set the most popular option to be the result of the poll
+
+
+
+Copyright © 2019-2020 Entropy Labs
